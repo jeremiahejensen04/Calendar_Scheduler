@@ -15,28 +15,29 @@ $(document).ready(function () {
       $(`#hour-${i+9} .description`).val(localStorage.getItem(`hour-${i+9}`))
       }
 
-      // use split to separate "hour" and "1" in the "hour-1" id and compile them in an array
-      // take the second value of the array (the number) and compare it with the 24 hour current time
-      //apply past,present,future classes based on whether their values are less or more than the actual
      var currentTime = dayjs().format("H");
-     var myArray = $("div id").split("-");
-     var hourNumber = $(myArray).last();
+   
+     function changeColor() {
 
-     if (hourNumber) {
-
-     }
-     else if {}
-
-     else {}
+      function splitDivIds() {
+        $('div id').each(function() {
+          var divId = $(this).attr('id');
+          var hourNumber = divId.split('-');
+          console.log(hourNumber);
+        });
+      }
      
-
+     
+      if (hourNumber < currentTime) {
+      $(this).children("textarea").addClass("past");
+    } else if (hourNumber === currentTime) {
+      $(this).children("textarea").removeClass("past");
+      $(this).children("textarea").addClass("present");
+    } else {
+      $(this).children("textarea").removeClass("past");
+      $(this).children("textarea").removeClass("present");
+      $(this).children("textarea").addClass("future");
+    }
+  };
   
-  
-  
-  
-      // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
 });
