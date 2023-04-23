@@ -13,31 +13,33 @@ $(document).ready(function () {
     var numHours = 9;
     for(var i = 0; i < numHours; i++) {
       $(`#hour-${i+9} .description`).val(localStorage.getItem(`hour-${i+9}`))
-      }
+    };
 
-     var currentTime = dayjs().format("H");
+    var currentTime = dayjs().format("H");
+    console.log(currentTime);
    
-     function changeColor() {
-
-      function splitDivIds() {
-        $('div id').each(function() {
+      
+    $('.row').each(function() {
           var divId = $(this).attr('id');
-          var hourNumber = divId.split('-');
+          var hourNumberArr = divId.split('-');
+          var hourNumber = hourNumberArr[1];
           console.log(hourNumber);
-        });
-      }
+
+          if (hourNumber < currentTime) {
+            $(this).children("textarea").addClass("past");
+          } else if (hourNumber === currentTime) {
+            $(this).children("textarea").removeClass("past");
+            $(this).children("textarea").addClass("present");
+          } else {
+            $(this).children("textarea").removeClass("past");
+            $(this).children("textarea").removeClass("present");
+            $(this).children("textarea").addClass("future");
+          }
+        
+    });
+
      
-     
-      if (hourNumber < currentTime) {
-      $(this).children("textarea").addClass("past");
-    } else if (hourNumber === currentTime) {
-      $(this).children("textarea").removeClass("past");
-      $(this).children("textarea").addClass("present");
-    } else {
-      $(this).children("textarea").removeClass("past");
-      $(this).children("textarea").removeClass("present");
-      $(this).children("textarea").addClass("future");
-    }
-  };
-  
+   
+      
+    
 });
